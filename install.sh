@@ -1,13 +1,13 @@
 #!/bin/bash
-# IDE Skills Installer
-# Copies the .claude/skills/ and .claude/commands/ from this library into a target repo.
+# Claude Skills Installer
+# Copies .claude/skills/ and .claude/commands/ from this library into a target repo.
 #
 # Usage:
 #   From the target repo root:
-#     bash /path/to/ide-skills/install.sh
+#     bash /path/to/claudeskills/install.sh
 #
-#   Or via curl (once hosted on GitHub):
-#     curl -fsSL https://raw.githubusercontent.com/YOUR_ORG/ide-skills/main/install.sh | bash
+#   Or via curl (recommended):
+#     curl -fsSL https://raw.githubusercontent.com/kendallmark3/claudeskills/main/install.sh | bash
 #
 #   Options:
 #     --force    Overwrite existing skills (default: skip if already present)
@@ -38,7 +38,7 @@ BLUE='\033[0;34m'
 RESET='\033[0m'
 
 echo ""
-echo -e "${BLUE}IDE Skills Installer${RESET}"
+echo -e "${BLUE}Claude Skills Installer${RESET}"
 echo "────────────────────────────────────"
 echo "Library:  $SCRIPT_DIR"
 echo "Target:   $TARGET_DIR"
