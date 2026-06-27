@@ -7,7 +7,7 @@
 #     bash /path/to/claudeskills/install.sh
 #
 #   Or via curl (recommended):
-#     curl -fsSL https://raw.githubusercontent.com/kendallmark3/claudeskills/main/install.sh | bash
+#     curl -fsSL https://raw.githubusercontent.com/kendallmark3/claudeskills/master/install.sh | bash
 #
 #   Options:
 #     --force    Overwrite existing skills (default: skip if already present)
@@ -112,11 +112,19 @@ echo ""
 echo "────────────────────────────────────"
 echo -e "${GREEN}Done.${RESET} ${#INSTALLED[@]} installed · ${#SKIPPED[@]} skipped"
 echo ""
-echo "Restart Claude Code to activate new commands."
-echo ""
-echo "Available commands after restart:"
+echo "Commands installed:"
 for cmd_file in "$SCRIPT_DIR/.claude/commands"/*.md; do
   cmd_name=$(basename "$cmd_file" .md)
-  echo "  /$cmd_name"
+  echo -e "  ${GREEN}✓${RESET} /$cmd_name"
 done
+echo ""
+echo "────────────────────────────────────"
+echo -e "${YELLOW}NEXT STEP — Reload Claude Code to register the commands:${RESET}"
+echo ""
+echo "  VS Code / Cursor:  Cmd+Shift+P → Developer: Reload Window"
+echo "  JetBrains:         Close and reopen the IDE"
+echo "  Claude Code CLI:   Exit and re-run 'claude'"
+echo ""
+echo "After reloading, type /daily-snapshot or /git-scorecard to run."
+echo "────────────────────────────────────"
 echo ""

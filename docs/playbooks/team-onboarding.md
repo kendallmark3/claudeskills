@@ -20,7 +20,7 @@ That's it. No API keys, no additional config.
 Run this from the root of each repo the team works in:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/kendallmark3/claudeskills/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/kendallmark3/claudeskills/master/install.sh | bash
 ```
 
 Commit the result so every developer gets the commands on their next pull:
@@ -96,7 +96,7 @@ Run `/git-scorecard` at sprint end and commit the result.
 2. Install GitHub CLI: https://cli.github.com
 3. Run `gh auth login`
 4. Pull the repo — `.claude/` is already committed, commands are ready
-5. Restart Claude Code once
+5. Reload Claude Code (VS Code: `Cmd+Shift+P` → `Developer: Reload Window`; CLI: exit and re-run `claude`)
 ```
 
 ---
@@ -108,7 +108,7 @@ When a new developer joins the team:
 1. They clone the repo — `.claude/` is already there
 2. They install Claude Code
 3. They install GitHub CLI and run `gh auth login`
-4. They restart Claude Code
+4. They reload Claude Code (VS Code: `Cmd+Shift+P` → `Developer: Reload Window`; CLI: exit and re-run `claude`)
 5. Commands are ready: `/daily-snapshot`, `/git-scorecard`, `/create-report-card`
 
 No additional setup. The skills travel with the repo.
@@ -122,12 +122,12 @@ If your team works across multiple repos, install skills into each one:
 ```bash
 # Repo 1
 cd /path/to/repo-1
-curl -fsSL https://raw.githubusercontent.com/kendallmark3/claudeskills/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/kendallmark3/claudeskills/master/install.sh | bash
 git add .claude/ && git commit -m "Add Claude skills" && git push
 
 # Repo 2
 cd /path/to/repo-2
-curl -fsSL https://raw.githubusercontent.com/kendallmark3/claudeskills/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/kendallmark3/claudeskills/master/install.sh | bash
 git add .claude/ && git commit -m "Add Claude skills" && git push
 ```
 
@@ -137,7 +137,7 @@ Or write a one-liner to hit all repos in a directory:
 for d in ~/repos/*/; do
   cd "$d"
   if [ -d ".git" ]; then
-    curl -fsSL https://raw.githubusercontent.com/kendallmark3/claudeskills/main/install.sh | bash
+    curl -fsSL https://raw.githubusercontent.com/kendallmark3/claudeskills/master/install.sh | bash
     git add .claude/ && git commit -m "Add Claude skills" && git push
   fi
 done
@@ -150,7 +150,7 @@ done
 When new skills are released, update each repo:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/kendallmark3/claudeskills/main/install.sh | bash -- --force
+curl -fsSL https://raw.githubusercontent.com/kendallmark3/claudeskills/master/install.sh | bash -- --force
 git add .claude/
 git commit -m "Update Claude skills to latest"
 git push
@@ -163,7 +163,7 @@ The `--force` flag overwrites existing skill files with the latest versions. All
 ## Troubleshooting
 
 **"Command not found" / "Unknown command"**
-Claude Code needs a restart to pick up new commands. Close the Claude Code window and reopen it in the repo. If commands still don't appear, verify `.claude/commands/` exists in the repo root.
+Claude Code needs a reload to register new commands. In VS Code/Cursor: `Cmd+Shift+P` → `Developer: Reload Window`. In JetBrains: close and reopen. Claude Code CLI: exit and re-run `claude`. If commands still don't appear after reloading, verify `.claude/commands/` exists in the repo root.
 
 **"GitHub CLI not available" in PR sections**
 The developer needs to install GitHub CLI and run `gh auth login`. The rest of the snapshot still works.
