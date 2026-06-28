@@ -19,17 +19,17 @@ You open Claude Code, type the command, Claude does the work, a polished markdow
 
 ---
 
-## Install — One Line
+## Install — One Command
 
 Open a terminal in the root of any repo and run:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/kendallmark3/claudeskills/master/install.sh | bash
+npx intentkit init
 ```
 
 Then **reload your Claude Code window** to activate the commands (VS Code: `Cmd+Shift+P` → `Developer: Reload Window`). The commands are ready once the window reloads.
 
-> **Installing into multiple repos?** Run the same curl command in each repo root. Takes five seconds per repo.
+> **Installing into multiple repos?** Run `npx intentkit init` in each repo root. Takes five seconds per repo.
 
 ---
 
@@ -115,7 +115,7 @@ The report includes a risk register, specific gaps with suggested file paths, an
 When new skills are released:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/kendallmark3/claudeskills/master/install.sh | bash -- --force
+npx intentkit init --force
 git add .claude/
 git commit -m "Update Claude skills to latest"
 git push

@@ -1,0 +1,36 @@
+{
+  "name": "intentkit",
+  "version": "1.0.0",
+  "description": "Claude Code skills for Intent-Driven Engineering teams — install /daily-snapshot and /git-scorecard into any repo",
+  "bin": {
+    "intentkit": "./bin/intentkit.js"
+  },
+  "files": [
+    "bin/",
+    ".claude/",
+    "README.md",
+    "SKILLS.md"
+  ],
+  "keywords": [
+    "claude-code",
+    "claude",
+    "ai",
+    "skills",
+    "engineering",
+    "intent-driven",
+    "developer-tools",
+    "git",
+    "scorecard",
+    "delivery"
+  ],
+  "author": "Mark Kendall",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kendallmark3/claudeskills.git"
+  },
+  "homepage": "https://github.com/kendallmark3/claudeskills#readme"
+}
