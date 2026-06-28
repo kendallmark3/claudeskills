@@ -48,6 +48,7 @@ if (!COMMAND || COMMAND === 'help' || COMMAND === '--help' || COMMAND === '-h') 
 if (COMMAND === 'list') {
   const skillsDir   = path.join(PKG_DIR, '.claude', 'skills')
   const commandsDir = path.join(PKG_DIR, '.claude', 'commands')
+  const intentDir   = path.join(PKG_DIR, '.intent')
   log()
   log(`${BOLD}Available skills:${RESET}`)
   for (const name of fs.readdirSync(skillsDir)) {
@@ -57,6 +58,11 @@ if (COMMAND === 'list') {
   log(`${BOLD}Available commands:${RESET}`)
   for (const file of fs.readdirSync(commandsDir)) {
     log(`  ${BLUE}/${RESET}${path.basename(file, '.md')}`)
+  }
+  log()
+  log(`${BOLD}IntentKit support directories:${RESET}`)
+  for (const name of fs.readdirSync(intentDir)) {
+    log(`  ${GREEN}✓${RESET}  .intent/${name}/`)
   }
   log()
   process.exit(0)
@@ -115,6 +121,23 @@ if (COMMAND === 'init') {
   }
 
   log()
+  log('Installing IntentKit support files (.intent/)...')
+  const srcIntent  = path.join(PKG_DIR, '.intent')
+  const destIntent = path.join(TARGET_DIR, '.intent')
+  for (const name of fs.readdirSync(srcIntent)) {
+    const srcSub  = path.join(srcIntent, name)
+    const destSub = path.join(destIntent, name)
+    if (fs.existsSync(destSub) && !FORCE) {
+      log(`  ${YELLOW}⟳ skipped${RESET}   .intent/${name}/  (already installed — use --force to update)`)
+      skipped++
+    } else {
+      copyDir(srcSub, destSub)
+      log(`  ${GREEN}✓ installed${RESET}  .intent/${name}/`)
+      installed++
+    }
+  }
+
+  log()
   log('────────────────────────────────────')
   log(`${GREEN}${BOLD}Done.${RESET} ${installed} installed · ${skipped} skipped`)
   log()
@@ -122,8 +145,8 @@ if (COMMAND === 'init') {
   if (installed > 0) {
     log('Commit the skills to your repo so every developer gets them:')
     log()
-    log('  git add .claude/')
-    log('  git commit -m "Add Claude skills — /daily-snapshot and /git-scorecard"')
+    log('  git add .claude/ .intent/')
+    log('  git commit -m "Add Claude skills and IntentKit delivery loop"')
     log('  git push')
     log()
   }

@@ -47,6 +47,21 @@ your-repo/
       daily-snapshot.md      ← registers /daily-snapshot
       git-scorecard.md       ← registers /git-scorecard
       create-report-card.md  ← registers /create-report-card
+      intentkit.md           ← registers /intentkit
+      ide.capture.md         ← registers /ide.capture  ┐
+      ide.refine.md          ←          /ide.refine    │
+      ide.context.md         ←          /ide.context   │ IntentKit
+      ide.plan.md            ←          /ide.plan      │ delivery loop
+      ide.tasks.md           ←          /ide.tasks     │
+      ide.implement.md       ←          /ide.implement │
+      ide.verify.md          ←          /ide.verify    │
+      ide.evidence.md        ←          /ide.evidence  │
+      ide.impact.md          ←          /ide.impact    ┘
+  .intent/
+    memory/       ← team principles, architecture rules, standards, DoD
+    templates/    ← 8 intent workspace templates
+    playbooks/    ← delivery loop guides
+    skills/       ← specialist agent skills
 ```
 
 These files live in your repo. Commit them and every developer on the team gets the commands automatically when they pull.
@@ -55,15 +70,15 @@ These files live in your repo. Commit them and every developer on the team gets 
 
 ## Commit to Your Repo (Recommended)
 
-After installing, add the `.claude/` folder to git:
+After installing, add the `.claude/` and `.intent/` folders to git:
 
 ```bash
-git add .claude/
-git commit -m "Add Claude skills — /daily-snapshot and /git-scorecard"
+git add .claude/ .intent/
+git commit -m "Add Claude skills and IntentKit delivery loop"
 git push
 ```
 
-Now any developer who clones the repo already has the commands. They just need Claude Code installed and a single restart.
+Now any developer who clones the repo already has the commands and IntentKit support files. They just need Claude Code installed and a single reload.
 
 ---
 
@@ -116,7 +131,7 @@ When new skills are released:
 
 ```bash
 npx intentkit init --force
-git add .claude/
+git add .claude/ .intent/
 git commit -m "Update Claude skills to latest"
 git push
 ```

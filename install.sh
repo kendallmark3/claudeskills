@@ -37,6 +37,24 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 RESET='\033[0m'
 
+# ── curl | bash guard ─────────────────────────────────────────────────────────
+# When piped via curl, BASH_SOURCE[0] resolves to PWD, not the source repo.
+# install.sh only works when run locally from a cloned copy of claudeskills.
+# For remote installs, use: npx intentkit init
+if [ -z "${BASH_SOURCE[0]}" ] || [ "${BASH_SOURCE[0]}" = "bash" ] || [ ! -d "$SCRIPT_DIR/.claude" ]; then
+  echo ""
+  echo "ERROR: install.sh cannot find its source files."
+  echo ""
+  echo "This script must be run locally from a cloned copy of claudeskills:"
+  echo "  git clone https://github.com/kendallmark3/claudeskills.git"
+  echo "  bash claudeskills/install.sh"
+  echo ""
+  echo "For a one-line remote install, use the npm CLI instead:"
+  echo "  npx intentkit init"
+  echo ""
+  exit 1
+fi
+
 echo ""
 echo -e "${BLUE}Claude Skills Installer${RESET}"
 echo "────────────────────────────────────"
@@ -104,6 +122,24 @@ for cmd_file in "$SCRIPT_DIR/.claude/commands"/*.md; do
     cp "$cmd_file" "$target_cmd"
     echo -e "  ${GREEN}✓ installed${RESET} /$cmd_name"
     INSTALLED+=("/$cmd_name")
+  fi
+done
+
+# ── Install .intent support files ─────────────────────────────────────────────
+echo ""
+echo "Installing IntentKit support files (.intent/)..."
+for intent_subdir in "$SCRIPT_DIR/.intent"/*/; do
+  intent_name=$(basename "$intent_subdir")
+  target_intent="$TARGET_DIR/.intent/$intent_name"
+
+  if [ -d "$target_intent" ] && [ "$FORCE" = false ]; then
+    echo -e "  ${YELLOW}⟳ skipped${RESET}  .intent/$intent_name/ (already exists — use --force to overwrite)"
+    SKIPPED+=(".intent/$intent_name/")
+  else
+    mkdir -p "$target_intent"
+    cp -r "$intent_subdir"* "$target_intent/"
+    echo -e "  ${GREEN}✓ installed${RESET} .intent/$intent_name/"
+    INSTALLED+=(".intent/$intent_name/")
   fi
 done
 

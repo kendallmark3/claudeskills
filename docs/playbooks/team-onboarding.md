@@ -20,14 +20,14 @@ That's it. No API keys, no additional config.
 Run this from the root of each repo the team works in:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/kendallmark3/claudeskills/master/install.sh | bash
+npx intentkit init
 ```
 
 Commit the result so every developer gets the commands on their next pull:
 
 ```bash
-git add .claude/
-git commit -m "Add Claude skills — /daily-snapshot and /git-scorecard"
+git add .claude/ .intent/
+git commit -m "Add Claude skills and IntentKit delivery loop"
 git push
 ```
 
@@ -122,13 +122,13 @@ If your team works across multiple repos, install skills into each one:
 ```bash
 # Repo 1
 cd /path/to/repo-1
-curl -fsSL https://raw.githubusercontent.com/kendallmark3/claudeskills/master/install.sh | bash
-git add .claude/ && git commit -m "Add Claude skills" && git push
+npx intentkit init
+git add .claude/ .intent/ && git commit -m "Add Claude skills" && git push
 
 # Repo 2
 cd /path/to/repo-2
-curl -fsSL https://raw.githubusercontent.com/kendallmark3/claudeskills/master/install.sh | bash
-git add .claude/ && git commit -m "Add Claude skills" && git push
+npx intentkit init
+git add .claude/ .intent/ && git commit -m "Add Claude skills" && git push
 ```
 
 Or write a one-liner to hit all repos in a directory:
@@ -137,8 +137,8 @@ Or write a one-liner to hit all repos in a directory:
 for d in ~/repos/*/; do
   cd "$d"
   if [ -d ".git" ]; then
-    curl -fsSL https://raw.githubusercontent.com/kendallmark3/claudeskills/master/install.sh | bash
-    git add .claude/ && git commit -m "Add Claude skills" && git push
+    npx intentkit init
+    git add .claude/ .intent/ && git commit -m "Add Claude skills" && git push
   fi
 done
 ```
@@ -150,8 +150,8 @@ done
 When new skills are released, update each repo:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/kendallmark3/claudeskills/master/install.sh | bash -- --force
-git add .claude/
+npx intentkit init --force
+git add .claude/ .intent/
 git commit -m "Update Claude skills to latest"
 git push
 ```
@@ -172,4 +172,4 @@ The developer needs to install GitHub CLI and run `gh auth login`. The rest of t
 Open Claude Code from the repo root (the folder that contains `.claude/`). If opened from a subdirectory, Claude Code won't see the commands.
 
 **install.sh fails with permission error**
-Run `chmod +x install.sh` if executing locally, or use the curl form which pipes directly to bash.
+Run `chmod +x install.sh` if executing locally. For remote installs, use `npx intentkit init` — it does not require cloning the repo.

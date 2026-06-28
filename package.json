@@ -8,6 +8,7 @@
   "files": [
     "bin/",
     ".claude/",
+    ".intent/",
     "README.md",
     "SKILLS.md"
   ],
