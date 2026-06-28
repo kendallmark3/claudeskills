@@ -8,5 +8,6 @@ A feature is done when:
 - Tasks are traceable to acceptance criteria.
 - Code is implemented using existing repo conventions.
 - Tests/checks pass or exceptions are documented.
+- For installer or file-distribution changes: verified by running the installer in an isolated directory and confirming all dependent files are present.
 - Evidence is captured.
 - Impact is measured or a measurement plan exists.

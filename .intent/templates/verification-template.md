@@ -16,5 +16,8 @@ What could have broken and how did we check it?
 ## Security / Compliance Checks
 Any authentication, authorization, data privacy, logging, or compliance concern?
 
+## Distribution Checks (npm packages only)
+Run `npm pack --dry-run` and confirm all expected directories appear in the manifest.
+
 ## Known Gaps
 - 
