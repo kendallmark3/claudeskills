@@ -17,10 +17,24 @@ That's it. No API keys, no additional config.
 
 ## Step 1 — Install Skills Into Each Repo (5 minutes per repo)
 
-Run this from the root of each repo the team works in:
+Run one of the following from the root of each repo the team works in:
 
+**Recommended — requires Node/npm:**
 ```bash
 npx intentkit init
+```
+
+**No NPM — tarball install:**
+```bash
+curl -L https://github.com/kendallmark3/claudeskills/archive/refs/heads/master.tar.gz \
+  | tar -xz -C /tmp
+bash /tmp/claudeskills-master/install.sh
+```
+
+**No NPM — git clone:**
+```bash
+git clone https://github.com/kendallmark3/claudeskills.git /tmp/claudeskills
+bash /tmp/claudeskills/install.sh
 ```
 
 Commit the result so every developer gets the commands on their next pull:
@@ -149,8 +163,20 @@ done
 
 When new skills are released, update each repo:
 
+**With npm:**
 ```bash
 npx intentkit init --force
+```
+
+**Without npm:**
+```bash
+curl -L https://github.com/kendallmark3/claudeskills/archive/refs/heads/master.tar.gz \
+  | tar -xz -C /tmp
+bash /tmp/claudeskills-master/install.sh --force
+```
+
+Then commit:
+```bash
 git add .claude/ .intent/
 git commit -m "Update Claude skills to latest"
 git push

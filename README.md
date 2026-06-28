@@ -19,17 +19,43 @@ You open Claude Code, type the command, Claude does the work, a polished markdow
 
 ---
 
-## Install — One Command
+## Install
 
-Open a terminal in the root of any repo and run:
+### Recommended — npx (requires Node/npm)
 
 ```bash
 npx intentkit init
 ```
 
-Then **reload your Claude Code window** to activate the commands (VS Code: `Cmd+Shift+P` → `Developer: Reload Window`). The commands are ready once the window reloads.
+Feels like `npx create-next-app` or `npx vite` — one command, no cloning required.
 
-> **Installing into multiple repos?** Run `npx intentkit init` in each repo root. Takes five seconds per repo.
+### No NPM — tarball install
+
+```bash
+curl -L https://github.com/kendallmark3/claudeskills/archive/refs/heads/master.tar.gz \
+  | tar -xz -C /tmp
+
+bash /tmp/claudeskills-master/install.sh
+```
+
+Downloads the full repo archive, extracts it, runs the installer locally. No Node or npm required.
+
+### No NPM — git clone install
+
+```bash
+git clone https://github.com/kendallmark3/claudeskills.git /tmp/claudeskills
+bash /tmp/claudeskills/install.sh
+```
+
+---
+
+After installing, **reload your Claude Code window** to activate the commands:
+
+- **VS Code / Cursor:** `Cmd+Shift+P` → `Developer: Reload Window`
+- **JetBrains:** close and reopen the IDE
+- **Claude Code CLI:** exit and re-run `claude`
+
+> **Installing into multiple repos?** Run the install command in each repo root. Takes five seconds per repo.
 
 ---
 
